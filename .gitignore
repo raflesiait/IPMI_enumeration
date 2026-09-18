@@ -1,0 +1,7 @@
+# captured hash output — never commit
+ipmi_hash.txt
+*_hash.txt
+hash.txt
+
+__pycache__/
+*.pyc
