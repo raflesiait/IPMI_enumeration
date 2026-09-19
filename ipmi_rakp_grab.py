@@ -179,7 +179,7 @@ def main():
             with open(args.o, "w") as f:
                 f.write("\n".join(found) + "\n")
             print(f"[*] {len(found)} hash disimpan ke {args.o}")
-        print(f"[*] Crack: hashcat -m 7300 <(cut -d: -f2- {args.o or 'hash.txt'}) /usr/share/wordlists/rockyou.txt")
+        print(f"[*] Crack: cut -d: -f2- {args.o or 'hash.txt'} > hc.txt && hashcat -m 7300 hc.txt /usr/share/wordlists/rockyou.txt")
     else:
         print("[-] Tidak ada hash yang didapat")
         sys.exit(1)

